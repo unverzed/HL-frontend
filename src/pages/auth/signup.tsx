@@ -65,7 +65,7 @@ export default function Signup() {
               <h1>Loading...</h1>
             </div>
           ) : (
-            "Signup"
+            "Cadastrar"
           )}
         </button>
         <StyledLink>
