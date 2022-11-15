@@ -29,6 +29,10 @@ const Head = styled.header`
     border: none;
     margin-right: 30px;
   }
+
+  .link {
+    text-decoration: none;
+  }
 `;
 
 export { Head };

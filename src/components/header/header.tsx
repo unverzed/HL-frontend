@@ -1,7 +1,7 @@
 import { Head } from "./style";
 import { UserContext } from "../../contexts/userContext";
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Header() {
   const { setToken } = useContext(UserContext);
@@ -15,7 +15,9 @@ export default function Header() {
 
   return (
     <Head>
+      <Link className="link" to={`/home`}>
       <h1>HubLocal</h1>
+      </Link>
       <button onClick={logOut}>Sair</button>
     </Head>
   );

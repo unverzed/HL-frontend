@@ -76,14 +76,14 @@ export default function Home() {
             {companies.map((company) => {
               return (
                 <Link className="link" to={`/company/${company.id}`}>
-                <Company key={company.id}>
-                  <div className="trash-div">
-                    <BsTrashFill />
-                  </div>
-                  <h2>{company.name}</h2>
-                  <h3>{company.CNPJ}</h3>
-                  <h4>{company.description}</h4>
-                </Company>
+                  <Company key={company.id}>
+                    <div className="trash-div">
+                      <BsTrashFill />
+                    </div>
+                    <h2>{company.name}</h2>
+                    <h3>{company.CNPJ}</h3>
+                    <h4>{company.description}</h4>
+                  </Company>
                 </Link>
               );
             })}
