@@ -21,10 +21,11 @@ const Main = styled.main`
     width: 250px;
     height: 30px;
     border: none;
-    background-color: #02D29E;
+    background-color: #02d29e;
     color: #ffffff;
     font-weight: bold;
     margin-right: 0px;
+    margin-bottom: 20px;
   }
 
   .company {
@@ -34,11 +35,13 @@ const Main = styled.main`
   }
 
   button {
-    background-color: #267FD3;
+    background-color: #267fd3;
     color: #ffffff;
     border: none;
     font-weight: bold;
     margin-right: 25px;
+    width: 25px;
+    height: 25px;
   }
 `;
 
@@ -47,10 +50,10 @@ const Form = styled.form`
   flex-direction: column;
   align-items: center;
   width: 280px;
+  height: 100%;
   background-color: #ffffff;
   margin-top: 30px;
   border-radius: 10px;
-  height: 190px;
   padding-left: 20px;
   padding-right: 20px;
   gap: 5px;
@@ -61,11 +64,22 @@ const Form = styled.form`
   }
 
   .name {
-    margin-top: 20px;
+    //margin-top: 20px;
   }
 
   .description {
     height: 50px;
+  }
+
+  .top-form {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+
+  .cancel {
+    color: #C33232;
   }
 `;
 

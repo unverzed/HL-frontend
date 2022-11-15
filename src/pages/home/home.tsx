@@ -3,6 +3,7 @@ import { Main, Form } from "./style";
 import { useState, useContext } from "react";
 import axios from "axios";
 import { UserContext } from "../../contexts/userContext";
+import { GiCancel } from "react-icons/gi";
 
 export default function Home() {
   const [form, setForm] = useState(false);
@@ -17,6 +18,11 @@ export default function Home() {
       Authorization: `Bearer ${token}`,
     },
   };
+
+
+  function cancelForm(){
+    setForm(false);
+  }
 
   function createCompany(event: any) {
     event.preventDefault();
@@ -50,6 +56,9 @@ export default function Home() {
         {form === true ? (
           <div className="company">
             <Form onSubmit={createCompany}>
+              <div className="top-form">
+                <GiCancel className="cancel" onClick={cancelForm}/>
+              </div>
               <input
                 className="name"
                 type="text"
