@@ -33,6 +33,7 @@ const Title = styled.h1`
   color: white;
   text-align: center;
   font-weight: bold;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
 `;
 
 const Main = styled.div`

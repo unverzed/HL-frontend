@@ -1,7 +1,8 @@
 import { Form, Title, Main, StyledLink } from "./style";
-import { Link, useNavigate  } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
 import axios from "axios";
+import { UserContext } from "../../contexts/userContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -9,6 +10,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const URL = `http://localhost:5000`;
+  const { setToken } = useContext(UserContext);
 
   function login(event: any) {
     event.preventDefault();
@@ -18,6 +20,7 @@ export default function Login() {
     const promise = axios.post(`${URL}/login`, data);
     promise.then((response) => {
       console.log(response);
+      setToken(response.data.token);
       setEmail("");
       setPassword("");
       navigate("/home");
@@ -47,7 +50,15 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Senha"
         ></input>
-        <button type="submit">Entrar</button>
+        <button type="submit" disabled={loading}>
+          {loading ? (
+            <div className="loading">
+              <h1>Loading...</h1>
+            </div>
+          ) : (
+            "Entrar"
+          )}
+        </button>
         <StyledLink>
           Ainda não tem uma conta?
           <Link to="/sign-up">
