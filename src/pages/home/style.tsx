@@ -79,8 +79,37 @@ const Form = styled.form`
   }
 
   .cancel {
-    color: #C33232;
+    color: #c33232;
   }
 `;
 
-export { Main, Form };
+const Companies = styled.div`
+  margin-top: 20px;
+
+  h2,
+  h3,
+  h4 {
+    color: black;
+  }
+`;
+
+const AllCompanies = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+`;
+
+const Company = styled.div`
+  background-color: #ffffff;
+  width: 300px;
+  height: 100px;
+  border-radius: 10px;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export { Main, Form, Companies, Company, AllCompanies };

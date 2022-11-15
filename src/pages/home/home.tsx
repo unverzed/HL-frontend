@@ -1,6 +1,6 @@
 import Header from "../../components/header/header";
-import { Main, Form } from "./style";
-import { useState, useContext } from "react";
+import { Main, Form, Companies, AllCompanies, Company } from "./style";
+import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { UserContext } from "../../contexts/userContext";
 import { GiCancel } from "react-icons/gi";
@@ -10,7 +10,9 @@ export default function Home() {
   const [name, setName] = useState("");
   const [CNPJ, setCNPJ] = useState("");
   const [description, setDescription] = useState("");
+  const [companies, setCompanies] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+  const [haveCompany, setHaveCompany] = useState(false);
   const { token } = useContext(UserContext);
   const URL = `http://localhost:5000`;
   const config = {
@@ -19,8 +21,7 @@ export default function Home() {
     },
   };
 
-
-  function cancelForm(){
+  function cancelForm() {
     setForm(false);
   }
 
@@ -37,11 +38,26 @@ export default function Home() {
       setDescription("");
     });
     promise.catch((error) => {
-      alert("Confira os dados e tente novamente");
       console.log(error);
     });
     promise.finally(() => {
       setLoading(false);
+    });
+  }
+
+  useEffect(() => {
+    renderCompanies();
+  }, []);
+
+  function renderCompanies() {
+    const promise = axios.get(`${URL}/company`, config);
+    promise.then((response) => {
+      console.log(response);
+      setHaveCompany(true);
+      setCompanies(response.data);
+    });
+    promise.catch((error) => {
+      console.log(error);
     });
   }
 
@@ -53,11 +69,28 @@ export default function Home() {
           <h1>Empresas</h1>
           <button onClick={createCompany}>+</button>
         </div>
+        {haveCompany ? (
+          <AllCompanies>
+          <Companies>
+            {companies.map((company) => {
+              return (
+                <Company>
+                  <h2>{company.name}</h2>
+                  <h3>{company.CNPJ}</h3>
+                  <h4>{company.description}</h4>
+                </Company>
+              );
+            })}
+          </Companies>
+          </AllCompanies>
+        ) : (
+          <></>
+        )}
         {form === true ? (
           <div className="company">
             <Form onSubmit={createCompany}>
               <div className="top-form">
-                <GiCancel className="cancel" onClick={cancelForm}/>
+                <GiCancel className="cancel" onClick={cancelForm} />
               </div>
               <input
                 className="name"
