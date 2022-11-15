@@ -19,8 +19,18 @@ const Company = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 50px;
+  height: 70px;
   background-color: black;
   justify-content: center;
+
+  .trash-div {
+    display: flex;
+    justify-content: flex-end;
+    justify-content: space-between;
+  }
+  .trash {
+    color: #ffffff;
+    margin-right: 20px;
+  }
 `;
 export { CompanyInfo, Company };

@@ -4,7 +4,6 @@ import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { UserContext } from "../../contexts/userContext";
 import { GiCancel } from "react-icons/gi";
-import { BsTrashFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 export default function Home() {
@@ -77,9 +76,6 @@ export default function Home() {
               return (
                 <Link className="link" to={`/company/${company.id}`}>
                   <Company key={company.id}>
-                    <div className="trash-div">
-                      <BsTrashFill />
-                    </div>
                     <h2>{company.name}</h2>
                     <h3>{company.CNPJ}</h3>
                     <h4>{company.description}</h4>

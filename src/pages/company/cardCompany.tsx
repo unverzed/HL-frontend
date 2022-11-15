@@ -4,6 +4,7 @@ import { useState, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../../contexts/userContext";
 import { CompanyInfo, Company } from "./style";
+import { BsTrashFill } from "react-icons/bs";
 
 export default function CardCompany() {
   const { id } = useParams();
@@ -30,6 +31,17 @@ export default function CardCompany() {
     });
   }
 
+  function deleteCompany() {
+    const promise = axios.delete(`${URL}/company/${id}`, config);
+
+    promise.then((response) => {
+      console.log(response);
+    });
+    promise.catch((error) => {
+      console.log(error);
+    });
+  }
+
   return (
     <>
       <Header />
@@ -37,9 +49,12 @@ export default function CardCompany() {
         {companies.map((company) => {
           return (
             <>
-            <Company>
-              <h1>Razão Social: {company.companyName}</h1>
-              <h2>CNPJ: {company.CNPJ}</h2>
+              <Company>
+                <div className="trash-div">
+                  <h1>Razão Social: {company.companyName}</h1>
+                  <BsTrashFill className="trash" onClick={deleteCompany} />
+                </div>
+                <h2>CNPJ: {company.CNPJ}</h2>
               </Company>
             </>
           );
