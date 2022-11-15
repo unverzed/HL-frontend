@@ -83,22 +83,17 @@ const Form = styled.form`
   }
 `;
 
-const Companies = styled.div`
-  margin-top: 20px;
-
-  h2,
-  h3,
-  h4 {
-    color: black;
-  }
-`;
-
 const AllCompanies = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  margin-top: 20px;
+
+  .link {
+    text-decoration: none;
+  }
 `;
 
 const Company = styled.div`
@@ -110,6 +105,19 @@ const Company = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  h2,
+  h3,
+  h4 {
+    color: black;
+  }
+
+  .trash-div {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20px;
+  }
 `;
 
-export { Main, Form, Companies, Company, AllCompanies };
+export { Main, Form, Company, AllCompanies };

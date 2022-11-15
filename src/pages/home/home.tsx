@@ -1,9 +1,11 @@
 import Header from "../../components/header/header";
-import { Main, Form, Companies, AllCompanies, Company } from "./style";
+import { Main, Form, AllCompanies, Company } from "./style";
 import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { UserContext } from "../../contexts/userContext";
 import { GiCancel } from "react-icons/gi";
+import { BsTrashFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [form, setForm] = useState(false);
@@ -71,17 +73,20 @@ export default function Home() {
         </div>
         {haveCompany ? (
           <AllCompanies>
-          <Companies>
             {companies.map((company) => {
               return (
-                <Company>
+                <Link className="link" to={`/company/${company.id}`}>
+                <Company key={company.id}>
+                  <div className="trash-div">
+                    <BsTrashFill />
+                  </div>
                   <h2>{company.name}</h2>
                   <h3>{company.CNPJ}</h3>
                   <h4>{company.description}</h4>
                 </Company>
+                </Link>
               );
             })}
-          </Companies>
           </AllCompanies>
         ) : (
           <></>

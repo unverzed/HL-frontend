@@ -53,6 +53,10 @@ const StyledLink = styled.div`
     color: #02d29e;
     font-weight: 500;
   }
+
+  a {
+    text-decoration: none;
+  }
 `;
 
 export { Form, Title, Main, StyledLink };
