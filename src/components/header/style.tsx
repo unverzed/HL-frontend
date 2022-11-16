@@ -9,6 +9,7 @@ const Head = styled.header`
   width: 100%;
   height: 70px;
   padding-top: 30px;
+  z-index: 1;
 
   h1 {
     font-family: "Inter", Arial, Helvetica, sans-serif;

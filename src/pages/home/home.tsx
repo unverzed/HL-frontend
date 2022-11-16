@@ -24,11 +24,13 @@ export default function Home() {
 
   function cancelForm() {
     setForm(false);
+    setHaveCompany(true);
   }
 
   function createCompany(event: any) {
     event.preventDefault();
     setForm(true);
+    setHaveCompany(false);
 
     const data = { name, CNPJ, description };
     const promise = axios.post(`${URL}/company`, data, config);
@@ -85,7 +87,7 @@ export default function Home() {
             })}
           </AllCompanies>
         ) : (
-          <></>
+          <p>Loading...</p>
         )}
         {form === true ? (
           <div className="company">
