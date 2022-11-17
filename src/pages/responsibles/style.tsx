@@ -86,4 +86,12 @@ const RespPage = styled.div`
     height: 25px;
   }
 `;
-export { RespCard, Nav, RespPage };
+
+const AllLocals = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+  
+`
+export { RespCard, Nav, RespPage, AllLocals };

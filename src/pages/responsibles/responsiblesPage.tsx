@@ -1,5 +1,5 @@
 import Header from "../../components/header/header";
-import { RespCard, Nav, RespPage } from "./style";
+import { RespCard, Nav, RespPage, AllLocals } from "./style";
 import { BiChevronLeft } from "react-icons/bi";
 import { useParams, Link } from "react-router-dom";
 import { UserContext } from "../../contexts/userContext";
@@ -7,10 +7,12 @@ import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { BsTrashFill } from "react-icons/bs";
 import FooterBar from "../../components/footer/footer";
+import Locals from "../../components/locals/locals";
 
 export default function ResponsiblePage() {
   const { id } = useParams();
   const [responsibles, setResponsibles] = useState<any>({});
+  const [addLocals, setAddLocals] = useState(false);
   const { token } = useContext(UserContext);
   const URL = `http://localhost:5000`;
   const config = {
@@ -32,9 +34,12 @@ export default function ResponsiblePage() {
     promise.catch((error) => {
       console.log(error);
     });
+    
   }
 
-  function addLocals() {}
+  function formLocals() {
+    setAddLocals(true);
+  }
 
   return Object.keys(responsibles).length > 0 ? (
     <>
@@ -61,10 +66,12 @@ export default function ResponsiblePage() {
             <p>{responsibles.CEP}</p>
           </div>
         </RespCard>
+
         <div className="locals">
           <h2>Locais:</h2>
-          <button onClick={addLocals}>+</button>
+          <button onClick={formLocals}>+</button>
         </div>
+        <AllLocals>{addLocals === true ? <Locals /> : <></>}</AllLocals>
       </RespPage>
       <FooterBar />
     </>
