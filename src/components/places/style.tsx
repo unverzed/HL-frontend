@@ -16,7 +16,7 @@ const Form = styled.form`
         width: 200px;
     }
 
-    .button-submit {
+    button {
         width: 200px;
         margin-right: 0px;
     }

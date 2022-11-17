@@ -58,7 +58,7 @@ const Company = styled.div`
   }
 `;
 
-const Places = styled.div`
+const Responsibles = styled.div`
   width: 100%;
   gap: 10px;
   margin-top: 30px;
@@ -66,21 +66,15 @@ const Places = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
 
-const Responsibles = styled.div`
-  width: 100%;
-  gap: 10px;
-  margin-top: 100px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  .link {
+    text-decoration: none;
+  }
 `;
 
 const Resp = styled.div`
   background-color: #ffffff;
-  width: 80%;
+  width: 200px;
   height: 70px;
   border-radius: 5px;
   display: flex;
@@ -89,4 +83,4 @@ const Resp = styled.div`
   justify-content: center;
 `;
 
-export { CompanyInfo, Company, Places, Responsibles, Resp };
+export { CompanyInfo, Company, Responsibles, Resp };

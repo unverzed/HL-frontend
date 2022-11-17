@@ -76,7 +76,7 @@ export default function Responsible() {
           value={isMainResponsible}
           onChange={(e) => setIsMainResponsible(e.target.value)}
           ></input>
-           <button type="submit" disabled={loading}>
+           <button className="button-submit" type="submit" disabled={loading}>
           {loading ? (
             <div className="loading">
               <h1>Loading...</h1>

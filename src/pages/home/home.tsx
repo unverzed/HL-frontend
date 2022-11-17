@@ -1,4 +1,5 @@
 import Header from "../../components/header/header";
+import FooterBar from "../../components/footer/footer";
 import { Main, Form, AllCompanies, Company } from "./style";
 import { useState, useContext, useEffect } from "react";
 import axios from "axios";
@@ -127,6 +128,7 @@ export default function Home() {
           <></>
         )}
       </Main>
+      <FooterBar/>
     </>
   );
 }

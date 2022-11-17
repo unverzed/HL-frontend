@@ -1,9 +1,9 @@
 import Header from "../../components/header/header";
 import axios from "axios";
 import { useState, useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { UserContext } from "../../contexts/userContext";
-import { CompanyInfo, Company, Places, Responsibles, Resp } from "./style";
+import { CompanyInfo, Company, Responsibles, Resp } from "./style";
 import { BsTrashFill } from "react-icons/bs";
 import Responsible from "../../components/responsibles/responsibles";
 
@@ -11,7 +11,6 @@ export default function CardCompany() {
   const { id } = useParams();
   const { token } = useContext(UserContext);
   const [companies, setCompanies] = useState<any[]>([]);
-  const [hasResp, setHasResp] = useState(false);
   const [addResponsible, setAddResponsible] = useState(false);
   const URL = `http://localhost:5000`;
   const config = {
@@ -22,7 +21,7 @@ export default function CardCompany() {
 
   useEffect(() => {
     renderCompany();
-  }, []);
+  }, );
 
   function renderCompany() {
     const promise = axios.get(`${URL}/company/${id}`, config);
@@ -68,13 +67,6 @@ export default function CardCompany() {
             );
           }
         })}
-        <Places>
-          <div className="button">
-            <h3>Locais:</h3>
-            <button>+</button>
-          </div>
-          <p>Ainda não tem ninguém</p>
-        </Places>
         <Responsibles>
           <div className="button">
             <h4>Responsáveis:</h4>
@@ -88,11 +80,13 @@ export default function CardCompany() {
                 while (i <= 5) {
                   return (
                     <>
-                      <Resp>
-                        <p>Responsável: {company.responsibleName}</p>
-                        <p>Telefone: {company.phone}</p>
-                        <p>CEP: {company.responsiblesCEP}</p>
-                      </Resp>
+                      <Link className="link" to={`/company/${id}/responsible/${company.responsibleId}`}>
+                        <Resp key={company.responsibleId}>
+                          <p>Responsável: {company.responsibleName}</p>
+                          <p>Telefone: {company.phone}</p>
+                          <p>CEP: {company.responsiblesCEP}</p>
+                        </Resp>
+                      </Link>
                     </>
                   );
                 }
