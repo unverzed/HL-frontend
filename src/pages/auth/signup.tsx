@@ -2,6 +2,7 @@ import { Form, Title, Main, StyledLink } from "./style";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -31,9 +32,7 @@ export default function Signup() {
 
   return (
     <Main>
-      <Title>
-        HubLocal
-      </Title>
+      <Title><h1>Hub</h1><span>Local</span></Title>
       <Form onSubmit={createUser}>
         <input
           type="text"
@@ -62,7 +61,7 @@ export default function Signup() {
         <button type="submit" disabled={loading}>
           {loading ? (
             <div className="loading">
-              <h1>Loading...</h1>
+              <ThreeDots color="white" />
             </div>
           ) : (
             "Cadastrar"

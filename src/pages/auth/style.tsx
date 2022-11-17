@@ -26,14 +26,33 @@ const Form = styled.form`
     font-weight: 600;
     font-size: 20px;
   }
+
+  .loading {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
 `;
 
-const Title = styled.h1`
-  font-size: 42px;
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: "Inter", Arial, Helvetica, sans-serif;
+const Title = styled.div`
+  display: flex;
+  justify-content: center;
+
+  h1 {
+    font-size: 42px;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-weight: bolder;
+    color: #02d29e;
+  }
+  span {
+    color: #ffffff;
+    font-size: 42px;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+    font-weight: 600;
+  }
 `;
 
 const Main = styled.div`

@@ -6,6 +6,7 @@ import { UserContext } from "../../contexts/userContext";
 import { CompanyInfo, Company, Responsibles, Resp } from "./style";
 import { BsTrashFill } from "react-icons/bs";
 import Responsible from "../../components/responsibles/responsibles";
+import FooterBar from "../../components/footer/footer";
 
 export default function CardCompany() {
   const { id } = useParams();
@@ -95,6 +96,7 @@ export default function CardCompany() {
           )}
         </Responsibles>
       </CompanyInfo>
+      <FooterBar/>
     </>
   );
 }

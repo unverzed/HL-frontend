@@ -74,13 +74,21 @@ const Responsibles = styled.div`
 
 const Resp = styled.div`
   background-color: #ffffff;
-  width: 200px;
-  height: 70px;
+  width: 300px;
+  height: 80px;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  a {
+    text-decoration: none;
+  }
+
+  p {
+    color: black;
+  }
 `;
 
 export { CompanyInfo, Company, Responsibles, Resp };

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import axios from "axios";
 import { UserContext } from "../../contexts/userContext";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -34,7 +35,10 @@ export default function Login() {
 
   return (
     <Main>
-      <Title>HubLocal</Title>
+      <Title>
+        <h1>Hub</h1>
+        <span>Local</span>
+      </Title>
       <Form onSubmit={login}>
         <input
           type="email"
@@ -53,7 +57,7 @@ export default function Login() {
         <button type="submit" disabled={loading}>
           {loading ? (
             <div className="loading">
-              <h1>Loading...</h1>
+              <ThreeDots color="white" />
             </div>
           ) : (
             "Entrar"

@@ -5,11 +5,12 @@ import { useParams, Link } from "react-router-dom";
 import { UserContext } from "../../contexts/userContext";
 import { useState, useContext, useEffect } from "react";
 import axios from "axios";
-import ErrorBoundary from "../../components/errorComponent";
+import { BsTrashFill } from "react-icons/bs";
+import FooterBar from "../../components/footer/footer";
 
 export default function ResponsiblePage() {
   const { id } = useParams();
-  const [responsibles, setResponsibles] = useState<any[]>([]);
+  const [responsibles, setResponsibles] = useState<any>({});
   const { token } = useContext(UserContext);
   const URL = `http://localhost:5000`;
   const config = {
@@ -33,26 +34,41 @@ export default function ResponsiblePage() {
     });
   }
 
-  return (
+  function addLocals() {}
+
+  return Object.keys(responsibles).length > 0 ? (
     <>
       <Header />
-      <ErrorBoundary>
-        <RespPage>
-          <Nav>
-            <div className="return">
-              <Link to={`/company/${id}`}>
-                <BiChevronLeft className="return-icon" />
-              </Link>
+
+      <RespPage>
+        <Nav>
+          <div className="return">
+            <Link to={`/company/${id}`}>
+              <BiChevronLeft className="return-icon" />
+            </Link>
+          </div>
+          <div className="title">
+            <h1>Responsável</h1>
+          </div>
+        </Nav>
+        <RespCard>
+          <div className="card">
+            <div className="head-card">
+              <BsTrashFill className="trash" />
             </div>
-            <div className="title">
-              <h1>Responsável</h1>
-            </div>
-          </Nav>
-          {responsibles.map((responsible) => {
-            return <></>;
-          })}
-        </RespPage>
-      </ErrorBoundary>
+            <p>{responsibles.name}</p>
+            <p>{responsibles.phone}</p>
+            <p>{responsibles.CEP}</p>
+          </div>
+        </RespCard>
+        <div className="locals">
+          <h2>Locais:</h2>
+          <button onClick={addLocals}>+</button>
+        </div>
+      </RespPage>
+      <FooterBar />
     </>
+  ) : (
+    <></>
   );
 }

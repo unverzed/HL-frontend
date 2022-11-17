@@ -6,6 +6,7 @@ import axios from "axios";
 import { UserContext } from "../../contexts/userContext";
 import { GiCancel } from "react-icons/gi";
 import { Link } from "react-router-dom";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function Home() {
   const [form, setForm] = useState(false);
@@ -88,7 +89,9 @@ export default function Home() {
             })}
           </AllCompanies>
         ) : (
-          <p>Loading...</p>
+          <div className="loading">
+              <ThreeDots color="white"/>
+            </div>
         )}
         {form === true ? (
           <div className="company">

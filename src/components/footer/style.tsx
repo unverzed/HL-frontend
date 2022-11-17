@@ -15,6 +15,10 @@ const Footer = styled.footer`
     color: #ffffff;
     text-decoration: none;
   }
+
+  .link {
+    text-decoration: none;
+  }
 `;
 
 export { Footer };

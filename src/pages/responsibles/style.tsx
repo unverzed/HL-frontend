@@ -3,15 +3,28 @@ import styled from "styled-components";
 const RespCard = styled.div`
   display: flex;
   justify-content: center;
-  width: 100vw;
-  height: 100vh;
-  margin-top: calc(30px + 30px);
 
   .card {
     background-color: #ffffff;
     width: 200px;
     height: 100px;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+  .head-card {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    margin-right: 20px;
+  }
+
+  .trash {
+    color: black;
   }
 `;
 
@@ -44,5 +57,33 @@ const Nav = styled.div`
   }
 `;
 
-const RespPage = styled.div``;
+const RespPage = styled.div`
+  width: 100vw;
+  height: 100vh;
+  margin-top: calc(30px + 30px);
+
+  .locals {
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  h2 {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 25px;
+  }
+
+  button {
+    background-color: #267fd3;
+    color: #ffffff;
+    border: none;
+    font-weight: bold;
+    margin-right: 25px;
+    width: 25px;
+    height: 25px;
+  }
+`;
 export { RespCard, Nav, RespPage };

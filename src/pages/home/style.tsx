@@ -43,6 +43,13 @@ const Main = styled.main`
     width: 25px;
     height: 25px;
   }
+
+  .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
 `;
 
 const Form = styled.form`
