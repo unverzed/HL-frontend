@@ -6,7 +6,7 @@ const RespCard = styled.div`
 
   .card {
     background-color: #ffffff;
-    width: 200px;
+    width: 300px;
     height: 100px;
     border-radius: 5px;
     display: flex;
@@ -92,6 +92,29 @@ const AllLocals = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 30px;
+  gap: 10px;
+
+  .link {
+    text-decoration: none;
+  }
   
 `
-export { RespCard, Nav, RespPage, AllLocals };
+const LocalCard = styled.div`
+  background-color: #ffffff;
+  width: 300px;
+  height: 80px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  a {
+    text-decoration: none;
+  }
+  p {
+    color: black;
+  }
+`;
+
+
+export { RespCard, Nav, RespPage, AllLocals, LocalCard };

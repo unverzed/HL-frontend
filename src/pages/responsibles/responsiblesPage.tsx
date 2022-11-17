@@ -1,5 +1,5 @@
 import Header from "../../components/header/header";
-import { RespCard, Nav, RespPage, AllLocals } from "./style";
+import { RespCard, Nav, RespPage, AllLocals, LocalCard } from "./style";
 import { BiChevronLeft } from "react-icons/bi";
 import { useParams, Link } from "react-router-dom";
 import { UserContext } from "../../contexts/userContext";
@@ -8,10 +8,12 @@ import axios from "axios";
 import { BsTrashFill } from "react-icons/bs";
 import FooterBar from "../../components/footer/footer";
 import Locals from "../../components/locals/locals";
+import { GiCancel } from "react-icons/gi";
 
 export default function ResponsiblePage() {
   const { id } = useParams();
   const [responsibles, setResponsibles] = useState<any>({});
+  const [locals, setLocals] = useState<any[]>([]);
   const [addLocals, setAddLocals] = useState(false);
   const { token } = useContext(UserContext);
   const URL = `http://localhost:5000`;
@@ -36,6 +38,21 @@ export default function ResponsiblePage() {
     });
     
   }
+
+  useEffect(() => {
+    renderLocals();
+  }, );
+
+  function renderLocals() {
+    const promise = axios.get(`${URL}/places/${id}`, config);
+    promise.then((response) => {
+      setLocals(response.data);
+    });
+    promise.catch((error) => {
+      console.log(error);
+    });
+  }
+  
 
   function formLocals() {
     setAddLocals(true);
@@ -71,7 +88,23 @@ export default function ResponsiblePage() {
           <h2>Locais:</h2>
           <button onClick={formLocals}>+</button>
         </div>
-        <AllLocals>{addLocals === true ? <Locals /> : <></>}</AllLocals>
+        <AllLocals>{addLocals === true ? <Locals /> : (<>
+            {locals.map((local, i) => {
+                while (i <= 5) {
+                  return (
+                    <>
+                      <Link className="link" to={`/places/${local.placesId}`}>
+                        <LocalCard key={local.responsibleId}>
+                          <p>Nome: {local.placesName}</p>
+                          <p>CEP: {local.CEP}</p>
+                        </LocalCard>
+                      </Link>
+                    </>
+                  );
+                }
+              })}
+          </>)}
+          </AllLocals>
       </RespPage>
       <FooterBar />
     </>
