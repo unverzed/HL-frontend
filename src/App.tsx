@@ -4,9 +4,9 @@ import Login from "./pages/auth/login";
 import Home from "./pages/home/home";
 import CardCompany from "./pages/company/cardCompany";
 import ResponsiblePage from "./pages/responsibles/responsiblesPage";
-import Tickets from "./pages/tickets/tickets";
 import { UserContextProvider } from "./contexts/userContext";
 import Ticket from "./pages/tickets/tickets";
+import Local from "./pages/local/local";
 
 export default function App() {
   return (
@@ -22,7 +22,8 @@ export default function App() {
               path="/company/:id/responsible/:idResponsible"
               element={<ResponsiblePage />}
             ></Route>
-             <Route path="/tickets" element={<Ticket />}></Route>
+            <Route path="/tickets" element={<Ticket />}></Route>
+            <Route path="/places/:id" element={<Local />}></Route>
           </Routes>
         </BrowserRouter>
       </UserContextProvider>

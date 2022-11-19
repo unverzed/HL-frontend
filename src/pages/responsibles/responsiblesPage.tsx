@@ -8,7 +8,6 @@ import axios from "axios";
 import { BsTrashFill } from "react-icons/bs";
 import FooterBar from "../../components/footer/footer";
 import Locals from "../../components/locals/locals";
-import { GiCancel } from "react-icons/gi";
 
 export default function ResponsiblePage() {
   const { id } = useParams();
@@ -30,7 +29,7 @@ export default function ResponsiblePage() {
   function renderResponsible() {
     const promise = axios.get(`${URL}/responsibles/${id}`, config);
     promise.then((response) => {
-      console.log(response);
+      
       setResponsibles(response.data);
     });
     promise.catch((error) => {
@@ -61,7 +60,6 @@ export default function ResponsiblePage() {
   return Object.keys(responsibles).length > 0 ? (
     <>
       <Header />
-
       <RespPage>
         <Nav>
           <div className="return">

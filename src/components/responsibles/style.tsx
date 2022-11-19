@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 const Form = styled.form`
     background-color: #ffffff;
-    width: 240px;
-    height: 150px;
+    width: 300px;
+    height: 300px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
