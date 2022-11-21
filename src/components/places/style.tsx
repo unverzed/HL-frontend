@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 const Form = styled.form`
     background-color: #ffffff;
-    width: 240px;
-    height: 150px;
+    width: 300px;
+    height: 200px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -17,8 +17,9 @@ const Form = styled.form`
     }
 
     button {
-        width: 200px;
+        width: 300px;
         margin-right: 0px;
+        background-color: #02d29e;
     }
 `
 export {Form};

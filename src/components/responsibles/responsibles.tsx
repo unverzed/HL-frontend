@@ -1,19 +1,27 @@
 import { Form } from "./style";
-import { useState, useContext, useRef } from "react";
+import {
+  useState,
+  useContext,
+  useRef,
+  ChangeEvent,
+} from "react";
 import axios from "axios";
 import { UserContext } from "../../contexts/userContext";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 export default function Responsible() {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [CEP, setCEP] = useState("");
-  const [rua, setRua] = useState("");
-  const [bairro, setBairro] = useState("");
-  const [cidade, setCidade] = useState("");
-  const [UF, setUF] = useState("");
-  const [numero, setNumero] = useState("");
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    CEP: "",
+    neighborhood: "",
+    street: "",
+    number: "",
+    state: "",
+    city: "",
+  });
+
   const [isMainResponsible, setIsMainResponsible] = useState<any>(false);
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
@@ -36,46 +44,29 @@ export default function Responsible() {
     uf: null,
   });
 
-  const { setValue, setFocus, handleSubmit, register } = useForm();
+  const { setFocus, register } = useForm();
 
-  const onSubmit = (e: any) => {
-    console.log(e);
-  };
-
-  function createResponsible(event: any) {
-    event.preventDefault();
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
     setLoading(true);
-
-    const data = {
-      name,
-      phone,
-      CEP,
-      rua,
-      bairro,
-      UF,
-      cidade,
-      numero,
-      isMainResponsible,
-    };
-    const promise = axios.post(`${URL}/responsible/${id}`, data, config);
+    const data = { ...form, isMainResponsible };
+    const promise = axios.post(`${URL}/responsibles/${id}`, data, config);
     promise.then((response) => {
       console.log(response);
-      setName("");
-      setCEP("");
-      setRua("");
-      setBairro("");
-      setCidade("");
-      setPhone("");
       setIsMainResponsible("");
       setHasResp(true);
     });
 
     promise.catch((error) => {
-      console.log(error);
+      console.error(error.response.data);
       setLoading(false);
       setHasResp(false);
     });
-  }
+
+    promise.finally(() => {
+      setLoading(false);
+    })
+  };
 
   const checkCEP = (e: any) => {
     const cep = e.target.value.replace(/\D/g, "");
@@ -83,31 +74,47 @@ export default function Responsible() {
     fetch(`https://viacep.com.br/ws/${cep}/json/`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setValue("address", data.logradouro);
-        setValue("neighborhood", data.bairro);
-        setValue("city", data.localidade);
-        setValue("uf", data.uf);
+        //console.log(data);
+        const { logradouro, bairro, localidade, uf } = data;
+        setForm({
+          ...form,
+          street: logradouro,
+          neighborhood: bairro,
+          city: localidade,
+          state: uf,
+        });
+
         setFocus("addressNumber");
+      })
+
+      .catch((error) => {
+        console.log(error);
       });
   };
 
+  function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  }
+
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit}>
       <input
         type="name"
         disabled={loading}
         required
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        value={form.name}
+        name="name"
+        onChange={handleInputChange}
         placeholder="Nome"
       ></input>
       <input
         type="text"
         disabled={loading}
         required
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
+        value={form.phone}
+        name="phone"
+        onChange={handleInputChange}
         placeholder="Telefone"
       ></input>
       <input
@@ -116,9 +123,10 @@ export default function Responsible() {
         disabled={loading}
         required
         ref={(element) => (inputRef.current["cep"] = element)}
-        value={CEP}
+        value={form.CEP}
+        name="CEP"
         onBlur={checkCEP}
-        onChange={(e) => setCEP(e.target.value)}
+        onChange={handleInputChange}
         placeholder="CEP"
       ></input>
       <input
@@ -127,8 +135,9 @@ export default function Responsible() {
         disabled={loading}
         required
         ref={(element) => (inputRef.current["bairro"] = element)}
-        value={bairro}
-        onChange={(e) => setBairro(e.target.value)}
+        name="neighborhood"
+        value={form.neighborhood}
+        onChange={handleInputChange}
         placeholder="Bairro"
       ></input>
       <input
@@ -137,8 +146,9 @@ export default function Responsible() {
         disabled={loading}
         required
         ref={(element) => (inputRef.current["endereco"] = element)}
-        value={rua}
-        onChange={(e) => setRua(e.target.value)}
+        name="street"
+        value={form.street}
+        onChange={handleInputChange}
         placeholder="Rua"
       ></input>
       <input
@@ -147,8 +157,9 @@ export default function Responsible() {
         disabled={loading}
         required
         ref={(element) => (inputRef.current["numero"] = element)}
-        value={numero}
-        onChange={(e) => setNumero(e.target.value)}
+        name="number"
+        value={form.number}
+        onChange={handleInputChange}
         placeholder="Número"
       ></input>
       <input
@@ -157,8 +168,9 @@ export default function Responsible() {
         disabled={loading}
         required
         ref={(element) => (inputRef.current["cidade"] = element)}
-        value={cidade}
-        onChange={(e) => setCidade(e.target.value)}
+        name="city"
+        value={form.city}
+        onChange={handleInputChange}
         placeholder="Cidade"
       ></input>
       <input
@@ -167,16 +179,21 @@ export default function Responsible() {
         disabled={loading}
         required
         ref={(element) => (inputRef.current["uf"] = element)}
-        value={UF}
-        onChange={(e) => setUF(e.target.value)}
+        name="state"
+        value={form.state}
+        onChange={handleInputChange}
         placeholder="UF"
       ></input>
-      <input
-        type="checkbox"
-        disabled={loading}
-        value={isMainResponsible}
-        onChange={(e) => setIsMainResponsible(e.target.value)}
-      ></input>
+      <div className="responsible">
+        <label>É o principal responsável?</label>
+        <input
+          className="checkbox"
+          type="checkbox"
+          disabled={loading}
+          value={isMainResponsible}
+          onChange={(e) => setIsMainResponsible(e.target.value)}
+        ></input>
+      </div>
       <button className="button-submit" type="submit" disabled={loading}>
         {loading ? (
           <div className="loading">

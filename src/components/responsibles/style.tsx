@@ -19,6 +19,21 @@ const Form = styled.form`
     .button-submit {
         width: 200px;
         margin-right: 0px;
+        background-color: #02d29e;
+    }
+
+    .responsible {
+        display: flex;
+        align-items: center;
+    }
+
+    .checkbox {
+        width: 20px;
+        height: 20px;
+    }
+
+    label {
+        font-size: 13px;
     }
 `
 export {Form};

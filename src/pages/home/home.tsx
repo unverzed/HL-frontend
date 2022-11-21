@@ -37,7 +37,6 @@ export default function Home() {
     const data = { name, CNPJ, description };
     const promise = axios.post(`${URL}/company`, data, config);
     promise.then((response) => {
-      console.log("deu certo");
       setName("");
       setCNPJ("");
       setDescription("");
@@ -57,7 +56,6 @@ export default function Home() {
   function renderCompanies() {
     const promise = axios.get(`${URL}/company`, config);
     promise.then((response) => {
-      console.log(response);
       setHaveCompany(true);
       setCompanies(response.data);
     });

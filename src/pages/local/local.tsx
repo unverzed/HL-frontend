@@ -6,6 +6,7 @@ import { UserContext } from "../../contexts/userContext";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import { BsTrashFill } from "react-icons/bs";
+import { FaEdit } from "react-icons/fa";
 
 export default function Local() {
   const { id } = useParams();
@@ -23,9 +24,8 @@ export default function Local() {
   }, []);
 
   function renderLocals() {
-    const promise = axios.get(`${URL}/allplaces/${id}`, config);
+    const promise = axios.get(`${URL}/places/${id}`, config);
     promise.then((response) => {
-      console.log(response);
       setLocals(response.data);
     });
     promise.catch((error) => {
@@ -35,6 +35,17 @@ export default function Local() {
 
   function deleteLocals() {
     const promise = axios.delete(`${URL}/places/${id}`, config);
+
+    promise.then((response) => {
+      console.log(response);
+    });
+    promise.catch((error) => {
+      console.log(error);
+    });
+  }
+
+  function editLocals() {
+    const promise = axios.put(`${URL}/places/${id}`, config);
 
     promise.then((response) => {
       console.log(response);
@@ -61,6 +72,7 @@ export default function Local() {
         <div className="card">
           <div className="head-card">
             <BsTrashFill onClick={deleteLocals} className="trash" />
+            <FaEdit onClick={editLocals} className="edit" />
           </div>
           <p>{locals.placesName}</p>
           <p>{locals.CEP}</p>

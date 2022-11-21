@@ -54,6 +54,10 @@ const AllLocals = styled.div`
   }
 
   .trash {
+    margin-right: 10px;
+  }
+
+  .edit {
     margin-right: 20px;
   }
 `

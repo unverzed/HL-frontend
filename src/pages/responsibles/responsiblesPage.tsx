@@ -5,7 +5,6 @@ import { useParams, Link } from "react-router-dom";
 import { UserContext } from "../../contexts/userContext";
 import { useState, useContext, useEffect } from "react";
 import axios from "axios";
-import { BsTrashFill } from "react-icons/bs";
 import FooterBar from "../../components/footer/footer";
 import Locals from "../../components/locals/locals";
 
@@ -43,7 +42,7 @@ export default function ResponsiblePage() {
   }, );
 
   function renderLocals() {
-    const promise = axios.get(`${URL}/places/${id}`, config);
+    const promise = axios.get(`${URL}/allplaces/${id}`, config);
     promise.then((response) => {
       setLocals(response.data);
     });
@@ -73,9 +72,6 @@ export default function ResponsiblePage() {
         </Nav>
         <RespCard>
           <div className="card">
-            <div className="head-card">
-              <BsTrashFill className="trash" />
-            </div>
             <p>{responsibles.name}</p>
             <p>{responsibles.phone}</p>
             <p>{responsibles.CEP}</p>

@@ -20,7 +20,6 @@ export default function Login() {
     const data = { email, password };
     const promise = axios.post(`${URL}/login`, data);
     promise.then((response) => {
-      console.log(response);
       setToken(response.data.token);
       setEmail("");
       setPassword("");
