@@ -115,7 +115,7 @@ export default function Responsible() {
         value={form.phone}
         name="phone"
         onChange={handleInputChange}
-        placeholder="Telefone"
+        placeholder="Telefone Fixo (DDD + Num)"
       ></input>
       <input
         type="text"
