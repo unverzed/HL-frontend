@@ -1,7 +1,7 @@
 import Header from "../../components/header/header";
 import { RespCard, Nav, RespPage, AllLocals, LocalCard } from "./style";
 import { BiChevronLeft } from "react-icons/bi";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/userContext";
 import { useState, useContext, useEffect } from "react";
 import axios from "axios";
@@ -10,6 +10,7 @@ import Locals from "../../components/locals/locals";
 
 export default function ResponsiblePage() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [responsibles, setResponsibles] = useState<any>({});
   const [locals, setLocals] = useState<any[]>([]);
   const [addLocals, setAddLocals] = useState(false);
@@ -20,6 +21,12 @@ export default function ResponsiblePage() {
       Authorization: `Bearer ${token}`,
     },
   };
+
+  useEffect(() => {
+    if(token === ""){
+      navigate("/");
+    }
+  }, []);
 
   useEffect(() => {
     renderResponsible();

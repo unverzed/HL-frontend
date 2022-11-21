@@ -5,7 +5,7 @@ import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { UserContext } from "../../contexts/userContext";
 import { GiCancel } from "react-icons/gi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
 
 export default function Home() {
@@ -15,6 +15,7 @@ export default function Home() {
   const [description, setDescription] = useState("");
   const [companies, setCompanies] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const [haveCompany, setHaveCompany] = useState(false);
   const { token } = useContext(UserContext);
   const URL = `http://localhost:5000`;
@@ -23,6 +24,12 @@ export default function Home() {
       Authorization: `Bearer ${token}`,
     },
   };
+
+  useEffect(() => {
+    if(token === ""){
+      navigate("/");
+    }
+  }, []);
 
   function cancelForm() {
     setForm(false);

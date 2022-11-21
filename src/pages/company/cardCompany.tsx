@@ -1,7 +1,7 @@
 import Header from "../../components/header/header";
 import axios from "axios";
 import { useState, useContext, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/userContext";
 import { CompanyInfo, Company, Responsibles, Resp } from "./style";
 import { BsTrashFill } from "react-icons/bs";
@@ -12,6 +12,7 @@ export default function CardCompany() {
   const { id } = useParams();
   const { token } = useContext(UserContext);
   const [companies, setCompanies] = useState<any[]>([]);
+  const navigate = useNavigate();
   const [addResponsible, setAddResponsible] = useState(false);
   const URL = `http://localhost:5000`;
   const config = {
@@ -19,6 +20,12 @@ export default function CardCompany() {
       Authorization: `Bearer ${token}`,
     },
   };
+
+  useEffect(() => {
+    if(token === ""){
+      navigate("/");
+    }
+  }, []);
 
   useEffect(() => {
     renderCompany();

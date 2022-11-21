@@ -4,7 +4,7 @@ import { Nav, AllLocals } from "./style";
 import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../contexts/userContext";
 import axios from "axios";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { BsTrashFill } from "react-icons/bs";
 import { FaEdit } from "react-icons/fa";
 
@@ -12,12 +12,19 @@ export default function Local() {
   const { id } = useParams();
   const [locals, setLocals] = useState<any>({});
   const { token } = useContext(UserContext);
+  const navigate = useNavigate();
   const URL = `http://localhost:5000`;
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
+
+  useEffect(() => {
+    if (token === "") {
+      navigate("/");
+    }
+  }, []);
 
   useEffect(() => {
     renderLocals();
