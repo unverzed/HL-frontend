@@ -1,46 +1,146 @@
-# Getting Started with Create React App
+<div align="center">
+<h1>HubLocal 🚀 </h1>
+  </div>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h2>Sobre o projeto:</h2>
+<p>Projeto feito para o processo seletivo da HubLocal para Fullstack Jr, foi solicitado que fosse implementado uma aplicação onde é possível criar e logar com um usuário, criar uma empresa, responsáveis, locais e enviar tickets para outros usuários no sistema.</p>
+<p>Observações: O projeto está incompleto até o UPDATE de Locais, não consegui implementar o endpoint utilizando Transactions em SQL puro. </p>
+  
+<h2>Rotas:</h2>
 
-## Available Scripts
+```yml 
+POST /signup
+    - Usuário cria uma conta
+    - headers: {}
+    - body:{
+        "name": "user",
+        "email": "user@gmail.com",
+        "password": "senhasecreta",
+    } 
+```
 
-In the project directory, you can run:
+```yml 
+POST /
+    - Usuário loga em sua conta
+    - headers: {}
+    - body:{
+       "email": "user@gmail.com",
+       "password": "user00"
+   }    
+```
 
-### `npm start`
+```yml 
+POST /company
+    - Usuário cria uma empresa
+    - headers: "Authorization": "Bearer $token"
+    - body:{
+      "name": "HubLocal",
+      "CNPJ": "85635809000142",
+      "description": "Base dos Hubnautas",
+    } 
+```
+```yml 
+GET /company/:id
+    - Retorna todas as empresas do usuário
+    - headers: "Authorization": "Bearer $token"
+    - body:{} 
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```yml 
+PUT /company/:id
+    - Edita as informações da empresa
+    - headers: "Authorization": "Bearer $token"
+    - body:{
+      "name": "HubLocal",
+      "CNPJ": "85635809000142",
+      "description": "Base dos Hubnautas",
+     } 
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```yml 
+DELETE /company:id
+    - Deleta as informações da empresa
+    - headers: "Authorization": "Bearer $token"
+    - body:{} 
+```
 
-### `npm test`
+```yml 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+POST /responsibles/:id
+    - Adiciona informação do responsável 
+    - headers: "Authorization": "Bearer $token"
+    - body:{
+      "name": "Vivi",
+      "phone": "8834076780",
+      "CEP": "60160250",
+      "neighborhood": "Bela Vista",
+      "street": "R.Pereira Valente",
+      "number": 100,
+      "city": "Fortaleza",
+      "state": "CE",
+      "isMainResponsible": true
+     } 
+```
 
-### `npm run build`
+```yml 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+POST /places/:id/responsibles/:id2
+    - Adiciona um local
+    - headers: "Authorization": "Bearer $token"
+    - body:{
+      "name": "Local da Vivi",
+      "CEP": "60160250",
+      "neighborhood": "Bela Vista",
+      "street": "R.Pereira Valente",
+      "number": 100,
+      "city": "Fortaleza",
+      "state": "CE"
+    }
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```yml 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+GET /places/:id
+    - Retorna um local
+    - headers: "Authorization": "Bearer $token"
+    - body:{} 
+```
 
-### `npm run eject`
+```yml 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+GET /allplaces/:id
+    - Retorna todos os locais cadastrados
+    - headers: "Authorization": "Bearer $token"
+    - body:{} 
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```yml 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+DELETE /places/:id
+    - Deleta um local
+    - headers: "Authorization": "Bearer $token"
+    - body:{} 
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<h2>Como rodar a aplicação:</h2>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<h3>Clone o repositório:</h3>
+
+```
+$ git clone https://github.com/unverzed/HL-frontend.git
+```
+
+<h3>Installe as dependências:</h3>
+
+```
+$ npm ou yarn install
+```
+
+<h3>Inicie a API:</h3>
+
+```
+$ npm start
+```
+
